@@ -68,7 +68,7 @@ export function Header() {
             color: "var(--text-dim)",
           }}
         >
-          v0.1.0
+          v0.2.3
         </span>
       </div>
       <a
