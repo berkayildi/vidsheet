@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/berkayildi/vidsheet/compare/v0.2.1...v0.2.2) (2026-03-31)
+
+
+### Bug Fixes
+
+* add sys.path for Vercel serverless Python imports ([9371f78](https://github.com/berkayildi/vidsheet/commit/9371f78ef13123bf681dfd99bb22b1376c46060a))
+
 ## [0.2.1](https://github.com/berkayildi/vidsheet/compare/v0.2.0...v0.2.1) (2026-03-31)
 
 
