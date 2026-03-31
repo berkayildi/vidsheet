@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/berkayildi/vidsheet/compare/v0.2.2...v0.2.3) (2026-03-31)
+
+
+### Bug Fixes
+
+* add requirements.txt to api/ for Vercel Python dependency resolution ([6b28cad](https://github.com/berkayildi/vidsheet/commit/6b28cad8ee7701a683601d38f27cb3e7ed240901))
+
 ## [0.2.2](https://github.com/berkayildi/vidsheet/compare/v0.2.1...v0.2.2) (2026-03-31)
 
 
