@@ -1,3 +1,4 @@
+import asyncio
 import base64
 
 from google import genai
@@ -12,14 +13,14 @@ def build_prompt(analysis: AnalysisResult) -> str:
         f"- {t.title}: {t.description}" for t in analysis.key_takeaways[:5]
     )
     return (
-        f"Create a comic-book style infographic poster with bold black outlines, "
-        f"vibrant pop-art colors, and halftone dot patterns. "
-        f'Title at the top in large bold letters: "{analysis.video_title}". '
-        f"Include visual representations of these key points:\n"
+        "Create a comic-book style infographic poster with bold black "
+        "outlines, vibrant pop-art colors, and halftone dot patterns. "
+        f'Title at the top in large bold letters: "{analysis.video_title}"'
+        f". Include visual representations of these key points:\n"
         f"{takeaway_lines}\n\n"
-        f"Style: retro comic book, speech bubbles, dynamic layout, "
-        f"bright saturated colors, bold typography. "
-        f"Make it visually engaging and shareable on social media."
+        "Style: retro comic book, speech bubbles, dynamic layout, "
+        "bright saturated colors, bold typography. "
+        "Make it visually engaging and shareable on social media."
     )
 
 
@@ -30,11 +31,12 @@ async def generate_infographic(
     client = genai.Client(api_key=api_key)
     prompt = build_prompt(analysis)
 
-    response = client.models.generate_content(
+    response = await asyncio.to_thread(
+        client.models.generate_content,
         model=Models.GEMINI_IMAGE,
         contents=prompt,
         config=types.GenerateContentConfig(
-            response_modalities=["IMAGE"],
+            response_modalities=["TEXT", "IMAGE"],
         ),
     )
 
@@ -48,7 +50,8 @@ async def generate_infographic(
     if not candidate.content or not candidate.content.parts:
         finish_reason = getattr(candidate, "finish_reason", "unknown")
         raise RuntimeError(
-            f"Gemini returned no image data. Finish reason: {finish_reason}. "
+            "Gemini returned no image data. "
+            f"Finish reason: {finish_reason}. "
             "Try a different video or simplify the prompt."
         )
 

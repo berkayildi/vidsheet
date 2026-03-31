@@ -33,7 +33,7 @@ export function UrlInput({ value, onChange, onSubmit, disabled }: UrlInputProps)
       <button
         onClick={onSubmit}
         disabled={disabled || !value.trim()}
-        className="w-full rounded-lg py-2.5 text-sm font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+        className="w-full cursor-pointer rounded-lg py-2.5 text-sm font-semibold text-white transition-all active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
         style={{ background: "var(--accent)" }}
         onMouseEnter={(e) => {
           if (!e.currentTarget.disabled)

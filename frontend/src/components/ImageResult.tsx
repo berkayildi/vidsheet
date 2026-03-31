@@ -24,7 +24,7 @@ export function ImageResult({ image }: ImageResultProps) {
       />
       <button
         onClick={handleDownload}
-        className="flex w-full items-center justify-center gap-2 rounded-lg border py-2 text-sm transition-colors"
+        className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg border py-2 text-sm transition-colors"
         style={{
           borderColor: "var(--border-hover)",
           color: "var(--text-secondary)",

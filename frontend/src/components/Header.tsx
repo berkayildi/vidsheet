@@ -75,7 +75,7 @@ export function Header() {
         href="https://github.com/berkayildi/content-pipeline-app"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-sm transition-colors"
+        className="cursor-pointer text-sm transition-colors"
         style={{ color: "var(--text-muted)" }}
         onMouseEnter={(e) =>
           (e.currentTarget.style.color = "var(--accent-light)")

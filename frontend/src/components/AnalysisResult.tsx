@@ -28,7 +28,7 @@ export function AnalysisResult({ analysis }: AnalysisResultProps) {
             href={analysis.video_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-1 block truncate text-xs transition-colors"
+            className="mt-1 block cursor-pointer truncate text-xs transition-colors"
             style={{ color: "var(--text-dim)" }}
             onMouseEnter={(e) =>
               (e.currentTarget.style.color = "var(--accent-light)")
@@ -114,7 +114,7 @@ export function AnalysisResult({ analysis }: AnalysisResultProps) {
           </h4>
           <button
             onClick={() => copyText(analysis.social_hook, "hook")}
-            className="rounded px-2 py-0.5 text-xs transition-colors"
+            className="cursor-pointer rounded px-2 py-0.5 text-xs transition-colors"
             style={{ color: "var(--text-muted)" }}
             onMouseEnter={(e) =>
               (e.currentTarget.style.color = "var(--accent-light)")

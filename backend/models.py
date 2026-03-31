@@ -1,9 +1,11 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class AnalyzeRequest(BaseModel):
-    youtube_url: str
-    anthropic_api_key: str  # never stored, per-request only
+    youtube_url: str = Field(..., min_length=10, max_length=500)
+    anthropic_api_key: str = Field(
+        ..., min_length=1, max_length=200
+    )  # never stored, per-request only
 
 
 class Takeaway(BaseModel):
@@ -22,7 +24,9 @@ class AnalysisResult(BaseModel):
 
 class GenerateImageRequest(BaseModel):
     analysis: AnalysisResult
-    gemini_api_key: str  # never stored, per-request only
+    gemini_api_key: str = Field(
+        ..., min_length=1, max_length=200
+    )  # never stored, per-request only
 
 
 class GenerateImageResponse(BaseModel):

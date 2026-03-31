@@ -70,7 +70,7 @@ export function App() {
                 pipeline.reset();
                 setYoutubeUrl("");
               }}
-              className="w-full rounded-lg border py-2 text-sm transition-colors"
+              className="w-full cursor-pointer rounded-lg border py-2 text-sm transition-colors"
               style={{
                 borderColor: "var(--border-hover)",
                 color: "var(--text-muted)",

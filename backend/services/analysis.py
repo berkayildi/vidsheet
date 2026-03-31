@@ -40,13 +40,19 @@ async def analyze_transcript(
         messages=[
             {
                 "role": "user",
-                "content": f"Video title: {video_title}\n\nTranscript:\n{truncated}",
+                "content": (f"Video title: {video_title}\n\nTranscript:\n{truncated}"),
             }
         ],
     )
 
-    response_text = message.content[0].text
-    data = json.loads(response_text)
+    response_text = message.content[0].text if message.content else None
+    if not response_text:
+        raise RuntimeError("Empty response from Anthropic API")
+
+    try:
+        data = json.loads(response_text)
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f"Failed to parse analysis response as JSON: {e}")
 
     return AnalysisResult(
         video_title=video_title,

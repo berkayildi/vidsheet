@@ -45,6 +45,7 @@ export function KeyInput({
           value={value}
           onChange={(e) => handleChange(e.target.value)}
           placeholder={placeholder}
+          autoComplete="off"
           className="w-full rounded-lg border px-3 py-2 pr-14 text-[13px] outline-none transition-colors"
           style={{
             fontFamily: "var(--font-mono)",
@@ -62,7 +63,7 @@ export function KeyInput({
         <button
           type="button"
           onClick={() => setVisible(!visible)}
-          className="absolute right-2 top-1/2 -translate-y-1/2 rounded px-1.5 py-0.5 text-[11px] transition-colors"
+          className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer rounded px-1.5 py-0.5 text-[11px] transition-colors"
           style={{ color: "var(--text-dim)" }}
           onMouseEnter={(e) =>
             (e.currentTarget.style.color = "var(--text-secondary)")

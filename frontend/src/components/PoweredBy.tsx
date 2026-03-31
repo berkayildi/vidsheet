@@ -20,7 +20,7 @@ export function PoweredBy() {
         href="https://github.com/berkayildi/mcp-content-pipeline"
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-2 block text-xs transition-colors"
+        className="mt-2 block cursor-pointer text-xs transition-colors"
         style={{ color: "var(--text-ghost)" }}
         onMouseEnter={(e) =>
           (e.currentTarget.style.color = "var(--accent-light)")
