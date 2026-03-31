@@ -1,3 +1,9 @@
+import os
+import sys
+
+# Ensure repo root is in Python path for Vercel serverless
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import asyncio
 import logging
 
