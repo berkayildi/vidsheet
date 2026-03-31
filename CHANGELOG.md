@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/berkayildi/vidsheet/compare/v0.2.0...v0.2.1) (2026-03-31)
+
+
+### Bug Fixes
+
+* remove functions block conflicting with builds in vercel.json ([3111e65](https://github.com/berkayildi/vidsheet/commit/3111e656d463cbea2a150c8a52e4d4a9e5f6a44e))
+
 ## [0.2.0](https://github.com/berkayildi/content-pipeline-app/compare/v0.1.0...v0.2.0) (2026-03-31)
 
 
