@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0c0c0f;
+  --bg-secondary: #0e0e12;
+  --bg-tertiary: #14141a;
+  --bg-card: #18181b;
+  --border: #1e1e24;
+  --border-hover: #27272a;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-dim: #52525b;
+  --text-ghost: #3f3f46;
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-light: #c4b5fd;
+  --accent-bg: #2e1f4a;
+  --success: #22c55e;
+  --font-sans: "Outfit", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Responsive grid layout */
+.main-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .sidebar {
+    grid-column: 1 / -1;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+@media (min-width: 1280px) {
+  .main-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr 1fr;
+    grid-template-rows: 1fr;
+    height: calc(100vh - 49px);
+  }
+  .sidebar {
+    grid-column: auto;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+  }
+  .col-analysis {
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+  }
+  .col-image {
+    overflow-y: auto;
+  }
+}

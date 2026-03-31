@@ -1,0 +1,18 @@
+[project]
+name = "content-pipeline-app"
+version = "0.1.0"
+description = "YouTube content analysis and comic-book infographic generator"
+requires-python = ">=3.12"
+
+[tool.vercel.app]
+path = "api/index.py:app"
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
