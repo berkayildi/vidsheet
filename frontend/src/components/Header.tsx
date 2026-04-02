@@ -68,11 +68,11 @@ export function Header() {
             color: "var(--text-dim)",
           }}
         >
-          v0.2.3
+          v0.2.3 {/* TODO: fetch from /api/health at runtime */}
         </span>
       </div>
       <a
-        href="https://github.com/berkayildi/content-pipeline-app"
+        href="https://github.com/berkayildi/vidsheet"
         target="_blank"
         rel="noopener noreferrer"
         className="cursor-pointer text-sm transition-colors"

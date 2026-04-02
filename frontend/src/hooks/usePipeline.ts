@@ -14,7 +14,8 @@ interface UsePipelineReturn {
   run: (
     youtubeUrl: string,
     anthropicApiKey: string,
-    geminiApiKey: string
+    geminiApiKey: string,
+    supadataApiKey: string
   ) => Promise<void>;
   reset: () => void;
 }
@@ -36,13 +37,18 @@ export function usePipeline(): UsePipelineReturn {
     async (
       youtubeUrl: string,
       anthropicApiKey: string,
-      geminiApiKey: string
+      geminiApiKey: string,
+      supadataApiKey: string
     ) => {
       reset();
 
       try {
         setState("analyzing");
-        const analysisResult = await analyzeVideo(youtubeUrl, anthropicApiKey);
+        const analysisResult = await analyzeVideo(
+          youtubeUrl,
+          anthropicApiKey,
+          supadataApiKey
+        );
         setAnalysis(analysisResult);
 
         setState("generating-image");
@@ -51,7 +57,9 @@ export function usePipeline(): UsePipelineReturn {
 
         setState("complete");
       } catch (err) {
-        setError(err instanceof Error ? err.message : "An unknown error occurred");
+        setError(
+          err instanceof Error ? err.message : "An unknown error occurred"
+        );
         setState("error");
       }
     },

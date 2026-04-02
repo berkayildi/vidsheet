@@ -1,5 +1,5 @@
 [project]
-name = "content-pipeline-app"
+name = "vidsheet"
 version = "0.2.3"
 description = "YouTube content analysis and comic-book infographic generator"
 requires-python = ">=3.12"

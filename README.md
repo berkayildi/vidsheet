@@ -10,7 +10,8 @@ Paste a YouTube link, provide your API keys, get structured content analysis + a
 Browser (React/Vite/TypeScript)
   |
   +---> POST /api/analyze
-  |       |-> YouTube transcript extraction
+  |       |-> Supadata API (transcript extraction, user's key)
+  |       |-> YouTube oEmbed API (video title)
   |       |-> Anthropic Claude analysis
   |       |-> Returns: structured JSON (TLDR, takeaways, social hook)
   |
@@ -21,9 +22,9 @@ Browser (React/Vite/TypeScript)
 
 ## How It Works
 
-1. **Paste a YouTube URL** into the input field
-2. **Enter your API keys** (Anthropic + Google Gemini) -- keys are used per-request and never stored
-3. **Get results** -- structured analysis card + downloadable comic-book infographic
+1. Paste a YouTube URL into the input field
+2. Enter your API keys (Anthropic, Google Gemini, and Supadata) -- keys are used per-request and never stored
+3. Get results -- structured analysis card + downloadable comic-book infographic
 
 ## Local Development
 
@@ -67,7 +68,7 @@ pytest
 | Backend | FastAPI, Python 3.12+ |
 | AI Analysis | Anthropic Claude (claude-sonnet-4-20250514) |
 | Image Generation | Google Gemini (gemini-3.1-flash-image-preview) |
-| Transcript | youtube-transcript-api |
+| Transcript | [Supadata](https://supadata.ai) API |
 | Hosting | Vercel (static + serverless Python) |
 
 ## Related

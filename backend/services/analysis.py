@@ -20,6 +20,8 @@ SYSTEM_PROMPT = (
     "- tldr: 1-2 sentences, clear and informative\n"
     "- key_takeaways: 3-7 items, each with a short title and description\n"
     "- social_hook: engaging, shareable, under 280 characters\n"
+    "- The transcript may be in any language. Always analyze and "
+    "respond in English regardless of the transcript language\n"
     "- Return ONLY the JSON object, no markdown fences or extra text"
 )
 
@@ -29,6 +31,7 @@ async def analyze_transcript(
     video_title: str,
     video_url: str,
     api_key: str,
+    transcript_lang: str = "en",
 ) -> AnalysisResult:
     truncated = transcript[: Limits.MAX_TRANSCRIPT_CHARS]
 
@@ -40,7 +43,11 @@ async def analyze_transcript(
         messages=[
             {
                 "role": "user",
-                "content": (f"Video title: {video_title}\n\nTranscript:\n{truncated}"),
+                "content": (
+                    f"Video title: {video_title}\n"
+                    f"Transcript language: {transcript_lang}\n\n"
+                    f"Transcript:\n{truncated}"
+                ),
             }
         ],
     )

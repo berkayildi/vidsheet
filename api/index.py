@@ -67,15 +67,20 @@ async def analyze(request: AnalyzeRequest) -> AnalysisResult:
         raise HTTPException(status_code=400, detail=str(e))
 
     try:
-        title, transcript = await asyncio.gather(
+        title, transcript_result = await asyncio.gather(
             get_video_title(video_id),
-            asyncio.to_thread(fetch_transcript, video_id),
+            fetch_transcript(request.youtube_url, request.supadata_api_key),
         )
+        transcript, transcript_lang = transcript_result
     except Exception:
         logger.exception("Failed to fetch video data")
         raise HTTPException(
             status_code=422,
-            detail=("Failed to fetch video data. Check the URL and try again."),
+            detail=(
+                "Failed to fetch video data. "
+                "Check the URL and Supadata API key "
+                "and try again."
+            ),
         )
 
     try:
@@ -84,6 +89,7 @@ async def analyze(request: AnalyzeRequest) -> AnalysisResult:
             video_title=title,
             video_url=request.youtube_url,
             api_key=request.anthropic_api_key,
+            transcript_lang=transcript_lang,
         )
     except Exception:
         logger.exception("Analysis failed")

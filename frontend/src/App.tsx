@@ -12,6 +12,7 @@ import { usePipeline } from "./hooks/usePipeline";
 export function App() {
   const [anthropicKey, setAnthropicKey] = useState("");
   const [geminiKey, setGeminiKey] = useState("");
+  const [supadataKey, setSupadataKey] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const pipeline = usePipeline();
 
@@ -19,12 +20,16 @@ export function App() {
     pipeline.state === "analyzing" || pipeline.state === "generating-image";
 
   const handleSubmit = useCallback(() => {
-    if (!anthropicKey || !geminiKey || !youtubeUrl.trim()) return;
-    pipeline.run(youtubeUrl.trim(), anthropicKey, geminiKey);
-  }, [anthropicKey, geminiKey, youtubeUrl, pipeline]);
+    if (!anthropicKey || !geminiKey || !supadataKey || !youtubeUrl.trim())
+      return;
+    pipeline.run(youtubeUrl.trim(), anthropicKey, geminiKey, supadataKey);
+  }, [anthropicKey, geminiKey, supadataKey, youtubeUrl, pipeline]);
 
   return (
-    <div className="flex min-h-screen flex-col" style={{ background: "var(--bg-primary)" }}>
+    <div
+      className="flex min-h-screen flex-col"
+      style={{ background: "var(--bg-primary)" }}
+    >
       <Header />
       <div className="main-grid flex-1">
         <aside className="sidebar flex flex-col gap-4 p-5">
@@ -42,11 +47,18 @@ export function App() {
             onChange={useCallback((v: string) => setGeminiKey(v), [])}
             placeholder="AI..."
           />
+          <KeyInput
+            label="Supadata API Key"
+            storageKey="supadata_api_key"
+            value={supadataKey}
+            onChange={useCallback((v: string) => setSupadataKey(v), [])}
+            placeholder="sd_..."
+          />
           <UrlInput
             value={youtubeUrl}
             onChange={setYoutubeUrl}
             onSubmit={handleSubmit}
-            disabled={isRunning || !anthropicKey || !geminiKey}
+            disabled={isRunning || !anthropicKey || !geminiKey || !supadataKey}
           />
 
           <LoadingSteps state={pipeline.state} />

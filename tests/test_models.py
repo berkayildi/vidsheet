@@ -6,9 +6,11 @@ class TestAnalyzeRequest:
         req = AnalyzeRequest(
             youtube_url="https://youtube.com/watch?v=abc123_-def",
             anthropic_api_key="sk-ant-test-key",
+            supadata_api_key="sd_test_key",
         )
         assert req.youtube_url == "https://youtube.com/watch?v=abc123_-def"
         assert req.anthropic_api_key == "sk-ant-test-key"
+        assert req.supadata_api_key == "sd_test_key"
 
 
 class TestAnalysisResult:

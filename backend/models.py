@@ -6,6 +6,9 @@ class AnalyzeRequest(BaseModel):
     anthropic_api_key: str = Field(
         ..., min_length=1, max_length=200
     )  # never stored, per-request only
+    supadata_api_key: str = Field(
+        ..., min_length=1, max_length=200
+    )  # never stored, per-request only
 
 
 class Takeaway(BaseModel):

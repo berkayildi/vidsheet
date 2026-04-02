@@ -1,7 +1,9 @@
+import logging
 import re
 
 import httpx
-from youtube_transcript_api import YouTubeTranscriptApi
+
+logger = logging.getLogger(__name__)
 
 VIDEO_ID_PATTERN = re.compile(
     r"(?:youtube\.com/watch\?.*v=|youtu\.be/"
@@ -20,28 +22,63 @@ def extract_video_id(url: str) -> str:
 async def get_video_title(video_id: str) -> str:
     safe_url = f"https://www.youtube.com/watch?v={video_id}"
     oembed_url = f"https://www.youtube.com/oembed?url={safe_url}&format=json"
-    async with httpx.AsyncClient() as client:
-        response = await client.get(oembed_url, timeout=10)
+    async with httpx.AsyncClient(timeout=10) as client:
+        response = await client.get(oembed_url)
         response.raise_for_status()
         return response.json()["title"]
 
 
-def fetch_transcript(video_id: str) -> str:
-    ytt_api = YouTubeTranscriptApi()
-    try:
-        transcript = ytt_api.fetch(video_id)
-    except Exception:
-        # English not available, try to find any transcript and translate
-        transcript_list = ytt_api.list(video_id)
-        available = list(transcript_list)
-        if not available:
-            raise ValueError("No transcripts available for this video")
-        # Prefer translatable transcripts
-        for t in available:
-            if t.is_translatable:
-                transcript = t.translate("en").fetch()
-                break
-        else:
-            # Fall back to first available without translation
-            transcript = available[0].fetch()
-    return " ".join(snippet.text for snippet in transcript.snippets)
+async def fetch_transcript(youtube_url: str, supadata_api_key: str) -> tuple[str, str]:
+    """Fetch transcript via Supadata API.
+
+    Returns tuple of (transcript_text, language_code).
+    """
+    headers = {"x-api-key": supadata_api_key}
+    base_params = {"url": youtube_url, "text": "true", "mode": "auto"}
+
+    async with httpx.AsyncClient(timeout=30) as client:
+        # Try English first
+        response = await client.get(
+            "https://api.supadata.ai/v1/transcript",
+            params={**base_params, "lang": "en"},
+            headers=headers,
+        )
+
+        if response.status_code == 200:
+            data = response.json()
+            content = data.get("content", "")
+            if content:
+                return content, data.get("lang", "en")
+
+        # Try without lang preference to get any available
+        response = await client.get(
+            "https://api.supadata.ai/v1/transcript",
+            params=base_params,
+            headers=headers,
+        )
+
+        if response.status_code == 200:
+            data = response.json()
+            content = data.get("content", "")
+            if content:
+                return content, data.get("lang", "unknown")
+
+        # Check for availableLangs in the error response
+        try:
+            error_data = response.json()
+            available: list[str] = error_data.get("availableLangs", [])
+            if available:
+                response = await client.get(
+                    "https://api.supadata.ai/v1/transcript",
+                    params={**base_params, "lang": available[0]},
+                    headers=headers,
+                )
+                if response.status_code == 200:
+                    data = response.json()
+                    content = data.get("content", "")
+                    if content:
+                        return content, data.get("lang", available[0])
+        except Exception:
+            pass
+
+        raise ValueError("No transcript available for this video")

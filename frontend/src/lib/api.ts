@@ -25,11 +25,13 @@ async function request<T>(path: string, body: unknown): Promise<T> {
 
 export function analyzeVideo(
   youtubeUrl: string,
-  anthropicApiKey: string
+  anthropicApiKey: string,
+  supadataApiKey: string
 ): Promise<AnalysisResult> {
   return request<AnalysisResult>("/api/analyze", {
     youtube_url: youtubeUrl,
     anthropic_api_key: anthropicApiKey,
+    supadata_api_key: supadataApiKey,
   });
 }
 
