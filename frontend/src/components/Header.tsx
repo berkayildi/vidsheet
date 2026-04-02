@@ -3,9 +3,9 @@ export function Header() {
     <header
       className="sticky top-0 z-10 flex items-center justify-between border-b px-6 py-3"
       style={{
-        borderColor: "var(--border)",
-        background: "rgba(12, 12, 15, 0.8)",
-        backdropFilter: "blur(12px)",
+        borderColor: 'var(--border)',
+        background: 'rgba(12, 12, 15, 0.8)',
+        backdropFilter: 'blur(12px)',
       }}
     >
       <div className="flex items-center gap-3">
@@ -54,8 +54,8 @@ export function Header() {
         <span
           className="text-lg font-semibold"
           style={{
-            fontFamily: "var(--font-sans)",
-            color: "var(--text-primary)",
+            fontFamily: 'var(--font-sans)',
+            color: 'var(--text-primary)',
           }}
         >
           VidSheet
@@ -63,12 +63,12 @@ export function Header() {
         <span
           className="rounded px-1.5 py-0.5 text-[10px]"
           style={{
-            fontFamily: "var(--font-mono)",
-            background: "var(--bg-card)",
-            color: "var(--text-dim)",
+            fontFamily: 'var(--font-mono)',
+            background: 'var(--bg-card)',
+            color: 'var(--text-dim)',
           }}
         >
-          v0.2.3 {/* TODO: fetch from /api/health at runtime */}
+          v0.3.0 {/* TODO: fetch from /api/health at runtime */}
         </span>
       </div>
       <a
@@ -76,12 +76,12 @@ export function Header() {
         target="_blank"
         rel="noopener noreferrer"
         className="cursor-pointer text-sm transition-colors"
-        style={{ color: "var(--text-muted)" }}
+        style={{ color: 'var(--text-muted)' }}
         onMouseEnter={(e) =>
-          (e.currentTarget.style.color = "var(--accent-light)")
+          (e.currentTarget.style.color = 'var(--accent-light)')
         }
         onMouseLeave={(e) =>
-          (e.currentTarget.style.color = "var(--text-muted)")
+          (e.currentTarget.style.color = 'var(--text-muted)')
         }
       >
         GitHub
