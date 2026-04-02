@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/berkayildi/vidsheet/compare/v0.3.0...v0.3.1) (2026-04-02)
+
+
+### Documentation
+
+* update readme ([e8b2cfe](https://github.com/berkayildi/vidsheet/commit/e8b2cfe11fde9d3353e0b8865693a05c2bad6900))
+
 ## [0.3.0](https://github.com/berkayildi/vidsheet/compare/v0.2.3...v0.3.0) (2026-04-02)
 
 
