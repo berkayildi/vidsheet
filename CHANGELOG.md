@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/berkayildi/vidsheet/compare/v0.2.3...v0.3.0) (2026-04-02)
+
+
+### Features
+
+* replace youtube-transcript-api with Supadata API for transcript fetching ([1aa4d20](https://github.com/berkayildi/vidsheet/commit/1aa4d206ad0f2fe0550e281b716865db187b98dd))
+
+
+### Bug Fixes
+
+* sync frontend version display to v0.2.3 ([52713c3](https://github.com/berkayildi/vidsheet/commit/52713c3a1a833e558b77b5f46644f77ff27d952d))
+
 ## [0.2.3](https://github.com/berkayildi/vidsheet/compare/v0.2.2...v0.2.3) (2026-03-31)
 
 
