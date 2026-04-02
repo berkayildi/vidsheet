@@ -4,6 +4,8 @@
 
 Paste a YouTube link, provide your API keys, get structured content analysis + a comic-book style infographic. Zero sign-up, stateless, BYO keys.
 
+![VidSheet screenshot](docs/screenshot.png)
+
 ## Architecture
 
 ```
@@ -62,14 +64,14 @@ pytest
 
 ## Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 19, Vite, TypeScript, Tailwind CSS v4 |
-| Backend | FastAPI, Python 3.12+ |
-| AI Analysis | Anthropic Claude (claude-sonnet-4-20250514) |
+| Layer            | Technology                                     |
+| ---------------- | ---------------------------------------------- |
+| Frontend         | React 19, Vite, TypeScript, Tailwind CSS v4    |
+| Backend          | FastAPI, Python 3.12+                          |
+| AI Analysis      | Anthropic Claude (claude-sonnet-4-20250514)    |
 | Image Generation | Google Gemini (gemini-3.1-flash-image-preview) |
-| Transcript | [Supadata](https://supadata.ai) API |
-| Hosting | Vercel (static + serverless Python) |
+| Transcript       | [Supadata](https://supadata.ai) API            |
+| Hosting          | Vercel (static + serverless Python)            |
 
 ## Related
 
