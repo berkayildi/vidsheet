@@ -4,7 +4,9 @@
 
 Paste a YouTube link or enter X accounts, provide your API keys, get structured content analysis + a comic-book style infographic. Zero sign-up, stateless, BYO keys.
 
-![VidSheet screenshot](docs/screenshot.png)
+![VidSheet screenshot1](docs/screenshot1.png)
+![VidSheet screenshot2](docs/screenshot2.png)
+![VidSheet screenshot3](docs/screenshot3.png)
 
 ## Architecture
 
