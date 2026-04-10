@@ -35,7 +35,7 @@ async def analyze_transcript(
 ) -> AnalysisResult:
     truncated = transcript[: Limits.MAX_TRANSCRIPT_CHARS]
 
-    client = anthropic.AsyncAnthropic(api_key=api_key)
+    client = anthropic.AsyncAnthropic(api_key=api_key.strip())
     message = await client.messages.create(
         model=Models.ANTHROPIC_ANALYSIS,
         max_tokens=Limits.ANTHROPIC_MAX_TOKENS,

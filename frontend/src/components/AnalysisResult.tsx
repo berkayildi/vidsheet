@@ -19,7 +19,7 @@ export function AnalysisResult({ analysis }: AnalysisResultProps) {
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <h3
-            className="text-lg font-semibold leading-snug"
+            className="text-xl font-semibold leading-snug"
             style={{ color: "var(--text-primary)" }}
           >
             {analysis.video_title}
@@ -66,7 +66,7 @@ export function AnalysisResult({ analysis }: AnalysisResultProps) {
           TL;DR
         </h4>
         <p
-          className="text-sm leading-relaxed"
+          className="text-base leading-relaxed"
           style={{ color: "var(--text-secondary)" }}
         >
           {analysis.tldr}
@@ -91,12 +91,12 @@ export function AnalysisResult({ analysis }: AnalysisResultProps) {
               }}
             >
               <h5
-                className="mb-0.5 text-[13px] font-medium"
+                className="mb-0.5 text-sm font-medium"
                 style={{ color: "var(--text-primary)" }}
               >
                 {takeaway.title}
               </h5>
-              <p className="text-xs leading-relaxed" style={{ color: "var(--text-muted)" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
                 {takeaway.description}
               </p>
             </div>

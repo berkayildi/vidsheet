@@ -2,19 +2,14 @@ import type { PipelineState } from "../types";
 
 interface LoadingStepsProps {
   state: PipelineState;
+  generateImage: boolean;
 }
-
-const steps = [
-  { key: "analyzing", label: "Transcript fetched" },
-  { key: "generating-image", label: "Content analyzed" },
-  { key: "complete", label: "Infographic generated" },
-] as const;
 
 function getStepStatus(
   stepKey: string,
-  state: PipelineState
+  state: PipelineState,
+  order: string[]
 ): "pending" | "active" | "done" {
-  const order = ["analyzing", "generating-image", "complete"];
   const stepIndex = order.indexOf(stepKey);
   const stateIndex = order.indexOf(state);
 
@@ -23,13 +18,26 @@ function getStepStatus(
   return "pending";
 }
 
-export function LoadingSteps({ state }: LoadingStepsProps) {
+export function LoadingSteps({ state, generateImage }: LoadingStepsProps) {
   if (state === "idle" || state === "error") return null;
+
+  const steps = generateImage
+    ? [
+        { key: "analyzing", label: "Transcript fetched" },
+        { key: "generating-image", label: "Content analyzed" },
+        { key: "complete", label: "Infographic generated" },
+      ]
+    : [
+        { key: "analyzing", label: "Transcript fetched" },
+        { key: "complete", label: "Content analyzed" },
+      ];
+
+  const order = steps.map((s) => s.key);
 
   return (
     <div className="flex flex-col gap-2">
       {steps.map((step) => {
-        const status = getStepStatus(step.key, state);
+        const status = getStepStatus(step.key, state, order);
         return (
           <div key={step.key} className="flex items-center gap-2.5">
             <div

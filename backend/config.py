@@ -11,4 +11,4 @@ class Limits:
     ANTHROPIC_MAX_TOKENS = 2048
 
 
-APP_VERSION = "0.3.0"
+APP_VERSION = "0.3.1"

@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { analyzeVideo, generateImage } from "../lib/api";
+import { analyzeVideo, generateImage as generateImageApi } from "../lib/api";
 import type {
   AnalysisResult,
   GenerateImageResponse,
@@ -15,7 +15,8 @@ interface UsePipelineReturn {
     youtubeUrl: string,
     anthropicApiKey: string,
     geminiApiKey: string,
-    supadataApiKey: string
+    supadataApiKey: string,
+    generateImage: boolean
   ) => Promise<void>;
   reset: () => void;
 }
@@ -38,7 +39,8 @@ export function usePipeline(): UsePipelineReturn {
       youtubeUrl: string,
       anthropicApiKey: string,
       geminiApiKey: string,
-      supadataApiKey: string
+      supadataApiKey: string,
+      generateImage: boolean
     ) => {
       reset();
 
@@ -51,9 +53,14 @@ export function usePipeline(): UsePipelineReturn {
         );
         setAnalysis(analysisResult);
 
-        setState("generating-image");
-        const imageResult = await generateImage(analysisResult, geminiApiKey);
-        setImage(imageResult);
+        if (generateImage) {
+          setState("generating-image");
+          const imageResult = await generateImageApi(
+            analysisResult,
+            geminiApiKey,
+          );
+          setImage(imageResult);
+        }
 
         setState("complete");
       } catch (err) {

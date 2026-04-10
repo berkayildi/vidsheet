@@ -28,7 +28,7 @@ async def generate_infographic(
     analysis: AnalysisResult,
     api_key: str,
 ) -> GenerateImageResponse:
-    client = genai.Client(api_key=api_key)
+    client = genai.Client(api_key=api_key.strip())
     prompt = build_prompt(analysis)
 
     response = await asyncio.to_thread(

@@ -33,11 +33,11 @@ async def fetch_transcript(youtube_url: str, supadata_api_key: str) -> tuple[str
 
     Returns tuple of (transcript_text, language_code).
     """
-    headers = {"x-api-key": supadata_api_key}
+    headers = {"x-api-key": supadata_api_key.strip()}
     base_params = {"url": youtube_url, "text": "true", "mode": "auto"}
 
     async with httpx.AsyncClient(timeout=30) as client:
-        # Try English first
+        # Try with lang=en (triggers fallback to any available language)
         response = await client.get(
             "https://api.supadata.ai/v1/transcript",
             params={**base_params, "lang": "en"},
@@ -50,35 +50,41 @@ async def fetch_transcript(youtube_url: str, supadata_api_key: str) -> tuple[str
             if content:
                 return content, data.get("lang", "en")
 
-        # Try without lang preference to get any available
-        response = await client.get(
-            "https://api.supadata.ai/v1/transcript",
-            params=base_params,
-            headers=headers,
-        )
+        # If 206 or empty, try to extract availableLangs and retry
+        if response.status_code in (200, 206):
+            try:
+                data = response.json()
+                available: list[str] = data.get("availableLangs", [])
+                if available:
+                    for lang_code in available:
+                        retry_response = await client.get(
+                            "https://api.supadata.ai/v1/transcript",
+                            params={**base_params, "lang": lang_code},
+                            headers=headers,
+                        )
+                        if retry_response.status_code == 200:
+                            retry_data = retry_response.json()
+                            content = retry_data.get("content", "")
+                            if content:
+                                return content, retry_data.get("lang", lang_code)
+            except Exception:
+                logger.debug("Failed to parse availableLangs from response")
 
-        if response.status_code == 200:
-            data = response.json()
-            content = data.get("content", "")
-            if content:
-                return content, data.get("lang", "unknown")
-
-        # Check for availableLangs in the error response
-        try:
-            error_data = response.json()
-            available: list[str] = error_data.get("availableLangs", [])
-            if available:
+        # Last resort: try common language codes directly
+        for lang_code in ["tr", "es", "pt", "fr", "de", "ja", "ko", "zh", "ar", "hi"]:
+            try:
                 response = await client.get(
                     "https://api.supadata.ai/v1/transcript",
-                    params={**base_params, "lang": available[0]},
+                    params={**base_params, "lang": lang_code},
                     headers=headers,
                 )
                 if response.status_code == 200:
                     data = response.json()
                     content = data.get("content", "")
                     if content:
-                        return content, data.get("lang", available[0])
-        except Exception:
-            pass
+                        return content, data.get("lang", lang_code)
+            except Exception:
+                logger.debug("Transcript fetch failed for lang=%s", lang_code)
+                continue
 
         raise ValueError("No transcript available for this video")
