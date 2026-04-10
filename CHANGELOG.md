@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/berkayildi/feedshot/compare/v0.5.0...v0.6.0) (2026-04-10)
+
+
+### Features
+
+* change name ([d6695a3](https://github.com/berkayildi/feedshot/commit/d6695a33f1678ccddd45e1f50cc7d9b2677ed98e))
+
 ## [0.5.0](https://github.com/berkayildi/feedshot/compare/v0.4.0...v0.5.0) (2026-04-10)
 
 
