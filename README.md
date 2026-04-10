@@ -4,11 +4,11 @@
 
 Paste a YouTube link or enter X accounts, provide your API keys, get structured content analysis + a comic-book style infographic. Zero sign-up, stateless, BYO keys.
 
-![VidSheet YouTube analysis](docs/screenshot1.png)
+![VidSheet YouTube analysis](docs/Screenshot1.png)
 
-![VidSheet X Feed digest](docs/screenshot2.png)
+![VidSheet X Feed digest](docs/Screenshot2.png)
 
-![VidSheet infographic](docs/screenshot3.png)
+![VidSheet infographic](docs/Screenshot3.png)
 
 ## Architecture
 
