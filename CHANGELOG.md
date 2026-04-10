@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.5.0](https://github.com/berkayildi/vidsheet/compare/v0.4.0...v0.5.0) (2026-04-10)
+
+
+### Features
+
+* add x content pipeline ([a26868a](https://github.com/berkayildi/vidsheet/commit/a26868abaec715ab2fe5afb451041b41ef8d56a4))
+
+
+### Documentation
+
+* add screenshots ([121dc6f](https://github.com/berkayildi/vidsheet/commit/121dc6f1d0fa5aa9a80c4bbb6c15b623e63d6379))
+* fix image file names in readme ([f3efde1](https://github.com/berkayildi/vidsheet/commit/f3efde18ccbf39629a8b16e5a765f0fd4b4cae9b))
+* update readme ([dfbc037](https://github.com/berkayildi/vidsheet/commit/dfbc0376671a9a3f40e22dc2f3eee22e95527cdc))
+
 ## [0.4.0](https://github.com/berkayildi/vidsheet/compare/v0.3.1...v0.4.0) (2026-04-10)
 
 
