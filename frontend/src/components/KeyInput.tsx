@@ -45,7 +45,7 @@ export function KeyInput({
           value={value}
           onChange={(e) => handleChange(e.target.value)}
           placeholder={placeholder}
-          autoComplete="off"
+          autoComplete="new-password"
           className="w-full rounded-lg border px-3 py-2 pr-14 text-[13px] outline-none transition-colors"
           style={{
             fontFamily: "var(--font-mono)",

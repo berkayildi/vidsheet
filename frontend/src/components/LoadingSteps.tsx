@@ -1,8 +1,9 @@
-import type { PipelineState } from "../types";
+import type { PipelineState, SourceMode } from "../types";
 
 interface LoadingStepsProps {
   state: PipelineState;
   generateImage: boolean;
+  sourceMode?: SourceMode;
 }
 
 function getStepStatus(
@@ -18,18 +19,23 @@ function getStepStatus(
   return "pending";
 }
 
-export function LoadingSteps({ state, generateImage }: LoadingStepsProps) {
+export function LoadingSteps({ state, generateImage, sourceMode = "youtube" }: LoadingStepsProps) {
   if (state === "idle" || state === "error") return null;
+
+  const isX = sourceMode === "x-feed";
+
+  const analyzeLabel = isX ? "Posts fetched from X" : "Transcript fetched";
+  const doneLabel = isX ? "Digest generated" : "Content analyzed";
 
   const steps = generateImage
     ? [
-        { key: "analyzing", label: "Transcript fetched" },
-        { key: "generating-image", label: "Content analyzed" },
+        { key: "analyzing", label: analyzeLabel },
+        { key: "generating-image", label: doneLabel },
         { key: "complete", label: "Infographic generated" },
       ]
     : [
-        { key: "analyzing", label: "Transcript fetched" },
-        { key: "complete", label: "Content analyzed" },
+        { key: "analyzing", label: analyzeLabel },
+        { key: "complete", label: doneLabel },
       ];
 
   const order = steps.map((s) => s.key);

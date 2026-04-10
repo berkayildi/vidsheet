@@ -1,4 +1,8 @@
-import type { AnalysisResult, GenerateImageResponse } from "../types";
+import type {
+  AnalysisResult,
+  GenerateImageResponse,
+  XDigestResult,
+} from "../types";
 
 const BASE_URL = "";
 
@@ -41,6 +45,32 @@ export function generateImage(
 ): Promise<GenerateImageResponse> {
   return request<GenerateImageResponse>("/api/generate-image", {
     analysis,
+    gemini_api_key: geminiApiKey,
+  });
+}
+
+export function analyzeXFeed(
+  xBearerToken: string,
+  anthropicApiKey: string,
+  usernames: string[],
+  topics: string[],
+  hoursBack: number
+): Promise<XDigestResult> {
+  return request<XDigestResult>("/api/analyze-x-feed", {
+    x_bearer_token: xBearerToken,
+    anthropic_api_key: anthropicApiKey,
+    usernames,
+    topics,
+    hours_back: hoursBack,
+  });
+}
+
+export function generateImageFromDigest(
+  digest: XDigestResult,
+  geminiApiKey: string
+): Promise<GenerateImageResponse> {
+  return request<GenerateImageResponse>("/api/generate-image-from-digest", {
+    digest,
     gemini_api_key: geminiApiKey,
   });
 }

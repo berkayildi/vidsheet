@@ -1,22 +1,33 @@
+import type { SourceMode } from "../types";
+
 interface CostEstimateProps {
   transcriptLength: number;
   generatedImage: boolean;
+  sourceMode?: SourceMode;
+  postTextLength?: number;
 }
 
 export function CostEstimate({
   transcriptLength,
   generatedImage,
+  sourceMode = "youtube",
+  postTextLength,
 }: CostEstimateProps) {
   // Claude claude-sonnet-4-20250514: $3/1M input tokens, $15/1M output tokens
   // Rough estimate: 4 chars per token
-  const inputTokens = Math.ceil(transcriptLength / 4);
-  const outputTokens = 500;
+  const isX = sourceMode === "x-feed";
+  const textLength = isX ? (postTextLength ?? 0) : transcriptLength;
+  const inputTokens = Math.ceil(textLength / 4);
+  const outputTokens = isX ? 1000 : 500;
   const anthropicCost = (inputTokens * 3 + outputTokens * 15) / 1_000_000;
 
   // Gemini gemini-3.1-flash-image-preview: ~$0.04 per image
   const geminiCost = generatedImage ? 0.04 : 0;
 
-  const totalCost = anthropicCost + geminiCost;
+  // X API read cost estimate
+  const xApiCost = isX ? 0.13 : 0;
+
+  const totalCost = anthropicCost + geminiCost + xApiCost;
 
   return (
     <div>
@@ -30,8 +41,8 @@ export function CostEstimate({
         }}
       >
         <div className="flex justify-between">
-          <span>Transcript</span>
-          <span>1 credit</span>
+          <span>{isX ? "X API read" : "Transcript"}</span>
+          <span>{isX ? `~$${xApiCost.toFixed(2)}` : "1 credit"}</span>
         </div>
         <div className="flex justify-between">
           <span>Analysis (~{inputTokens.toLocaleString()} tokens)</span>
