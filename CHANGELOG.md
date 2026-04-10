@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/berkayildi/vidsheet/compare/v0.3.1...v0.4.0) (2026-04-10)
+
+
+### Features
+
+* make image optional and improvements ([b4a453f](https://github.com/berkayildi/vidsheet/commit/b4a453f5a4a693a668cf0ab67dbfd2b8ca60c8d9))
+
 ## [0.3.1](https://github.com/berkayildi/vidsheet/compare/v0.3.0...v0.3.1) (2026-04-02)
 
 
