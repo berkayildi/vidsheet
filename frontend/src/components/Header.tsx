@@ -58,7 +58,7 @@ export function Header() {
             color: 'var(--text-primary)',
           }}
         >
-          VidSheet
+          FeedShot
         </span>
         <span
           className="rounded px-1.5 py-0.5 text-[10px]"
@@ -72,7 +72,7 @@ export function Header() {
         </span>
       </div>
       <a
-        href="https://github.com/berkayildi/vidsheet"
+        href="https://github.com/berkayildi/feedshot"
         target="_blank"
         rel="noopener noreferrer"
         className="cursor-pointer text-sm transition-colors"

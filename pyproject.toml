@@ -1,5 +1,5 @@
 [project]
-name = "vidsheet"
+name = "feedshot"
 version = "0.5.0"
 description = "YouTube and X feed content analysis with comic-book infographic generator"
 requires-python = ">=3.12"

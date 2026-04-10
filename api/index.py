@@ -37,7 +37,7 @@ from backend.services.youtube import (
 
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="VidSheet API", version=APP_VERSION)
+app = FastAPI(title="FeedShot API", version=APP_VERSION)
 
 
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
