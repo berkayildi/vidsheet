@@ -68,7 +68,7 @@ export function Header() {
             color: 'var(--text-dim)',
           }}
         >
-          v0.4.0 {/* TODO: fetch from /api/health at runtime */}
+          v0.5.0 {/* TODO: fetch from /api/health at runtime */}
         </span>
       </div>
       <a
